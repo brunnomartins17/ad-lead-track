@@ -119,6 +119,14 @@ const questions = [
     }
 ]
 
+
+const mapTagSendFlow = {
+    f: "oro-jun25frio",
+    o: "oro-jun25org",
+    m: "oro-jun25morno",
+    q: "oro-jun25quente",
+} as any;
+
 export default function Quiz({ params }: { params: { form: string } }) {
     const searchParams = useSearchParams()
     const _params = useParams()
@@ -139,7 +147,7 @@ export default function Quiz({ params }: { params: { form: string } }) {
     const [domain, setDomain] = useState<string>("")
     const [isLoading, setIsLoading] = useState(false)
 
-    const launch = "[ORO] [MAR25]"
+    const launch = "[ORO] [JUN25]"
   
     // Capturar o domínio da página
     useEffect(() => {
@@ -275,12 +283,12 @@ export default function Quiz({ params }: { params: { form: string } }) {
             .then(data => {
                 console.log('Success:', data);
                 setIsLoading(false);
-                window.location.href = `https://sendflow.pro/i/oromar25${temperatura === 'f' ? 'f1' : temperatura}5` 
+                window.location.href = `https://sendflow.pro/i/${mapTagSendFlow[temperatura || 'f']}` 
             })
             .catch((error) => {
                 console.error('Error:', error);
                 setIsLoading(false);
-                window.location.href = `https://sendflow.pro/i/oromar25${temperatura === 'f' ? 'f1' : temperatura}5`
+                window.location.href = `https://sendflow.pro/i/${mapTagSendFlow[temperatura || 'f']}`
             });
         }
     }, [completed, searchParams, answers, totalScore, questions, tipo, versao, temperatura, domain, launch]);
@@ -437,7 +445,7 @@ export default function Quiz({ params }: { params: { form: string } }) {
 
                             <Button 
                                 className="w-full py-4 md:py-6 text-base md:text-lg bg-green-600 hover:bg-green-700"
-                                onClick={() => window.location.href = `https://sendflow.pro/i/oromar25${temperatura === 'f' ? 'f1' : temperatura}5`}
+                                onClick={() => window.location.href = `https://sendflow.pro/i/${mapTagSendFlow[temperatura || 'f']}`}
                             >
                                 <Phone className="mr-2 h-4 w-4 md:h-5 md:w-5" /> 
                                 Entrar no Grupo no WhatsApp

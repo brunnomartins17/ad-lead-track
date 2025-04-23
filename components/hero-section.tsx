@@ -22,6 +22,7 @@ export default function HeroSection() {
   const [domain, setDomain] = useState<string>("")
 
   const launch = "[ORO] [MAR25]"
+  
 
   // Capturar o domínio da página
   useEffect(() => {
@@ -220,8 +221,41 @@ export default function HeroSection() {
     }
   }
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    
+    if (name === "whatsapp") {
+      // Remove todos os caracteres não numéricos
+      const numericValue = value.replace(/\D/g, "");
+      
+      // Aplica a formatação de acordo com a quantidade de dígitos
+      let formattedValue = numericValue;
+      if (ddi === "+55") {
+        // Formato brasileiro: (XX) XXXXX-XXXX
+        if (numericValue.length <= 2) {
+          formattedValue = numericValue;
+        } else if (numericValue.length <= 7) {
+          formattedValue = `(${numericValue.slice(0, 2)}) ${numericValue.slice(2)}`;
+        } else {
+          formattedValue = `(${numericValue.slice(0, 2)}) ${numericValue.slice(2, 7)}-${numericValue.slice(7, 11)}`;
+        }
+      } else {
+        // Formato genérico para outros países
+        if (numericValue.length > 3 && numericValue.length <= 7) {
+          formattedValue = `${numericValue.slice(0, 3)}-${numericValue.slice(3)}`;
+        } else if (numericValue.length > 7) {
+          formattedValue = `${numericValue.slice(0, 3)}-${numericValue.slice(3, 7)}-${numericValue.slice(7)}`;
+        }
+      }
+      
+      setWhatsapp(formattedValue);
+    } else {
+      setWhatsapp(value);
+    }
+  };
+
   return (
-    <section id="hero" className="relative flex items-center overflow-hidden bg-gradient-to-r from-[#000000] via-[#0a3a4a] to-[#000000] mb-[-50px] lg:mb-[-150px] z-0">
+    <section id="hero" className={`relative flex items-center overflow-hidden bg-gradient-to-r from-[#000000] via-[#0a3a4a] to-[#000000] mb-[-50px] lg:mb-[-150px] z-0`}>
       {/* Background com overlay */}
       <div className="absolute inset-0 bg-[url('/images/paper-texture.png')] bg-cover bg-center opacity-15"></div>
 
@@ -300,7 +334,8 @@ export default function HeroSection() {
                     id="form-field-telefone"
                     className="flex-1 px-4 py-3 rounded-r-md bg-[#f4f0e1]/90 text-[#07242c] focus:outline-none"
                     value={whatsapp}
-                    onChange={(e) => setWhatsapp(e.target.value)}
+                    onChange={handleChange}
+                    name="whatsapp"
                     required
                   />
                 </div>

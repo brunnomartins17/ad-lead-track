@@ -1,15 +1,17 @@
 import type React from "react"
 import type { Metadata } from "next"
 import './globals.css'
-import localFont from 'next/font/local'
+import { Spectral } from 'next/font/google'
 import "./globals.css"
 import GoogleTagManager from "./components/GoogleTagManager"
 const GTM_ID = "GTM-NC7GGZBX"; // Substitua pelo seu GTM ID
 
-// const teramo = localFont({
-//   src: '../public/fonts/Teramo.ttf',
-//   variable: '--font-teramo',
-// })
+const spectral = Spectral({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-spectral',
+  weight: ['400', '500', '600', '700']
+})
 
 export const metadata: Metadata = {
   title: "O Resgate dos Otimistas - Diagnóstico de Dependência Emocional",
@@ -33,7 +35,7 @@ export default function RootLayout({
             <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
             <link rel="apple-touch-icon" href="/apple-icon.svg" type="image/svg+xml" />
         </head> */}
-      <body className={`teramo`}>
+      <body className={`${spectral.className}`}>
         <GoogleTagManager />
         {children}
       </body>

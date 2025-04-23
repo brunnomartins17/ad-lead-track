@@ -58,11 +58,6 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
-        serif: ["Georgia", "serif"],
-        teramo: ['Teramo', 'sans-serif'],
-      },
       backgroundImage: {
         "hero-pattern": "url('/images/hero-bg.jpg')",
         "journey-pattern": "url('/images/journey-bg.jpg')",

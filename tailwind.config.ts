@@ -61,6 +61,7 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],
         serif: ["Georgia", "serif"],
+        teramo: ['Teramo', 'sans-serif'],
       },
       backgroundImage: {
         "hero-pattern": "url('/images/hero-bg.jpg')",

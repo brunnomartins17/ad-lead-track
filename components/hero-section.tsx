@@ -83,7 +83,19 @@ export default function HeroSection() {
       if (paramValue) {
         const parts = paramValue.split('-');
         
-        if (parts.length >= 3) {
+        if (paramValue.indexOf('v1') != -1) {
+          const tipoValue = parts[2];
+          const versaoValue = parts[1];
+          const temperaturaValue = parts[parts.length - 1];
+          
+          console.log('Tipo:', tipoValue);
+          console.log('Versão:', versaoValue);
+          console.log('Temperatura:', temperaturaValue);
+          
+          setTipo(tipoValue);
+          setVersao(versaoValue);
+          setTemperatura(temperaturaValue);
+        } else if (paramValue.indexOf('v9') != -1) {
           const tipoValue = parts[0];
           const versaoValue = parts[1];
           const temperaturaValue = parts[2];
@@ -236,7 +248,6 @@ export default function HeroSection() {
               <p className="text-[#f4f0e1] text-xl mb-1">Faça seu diagnóstico de</p>
               <h2 className="text-[#c0964b] text-3xl md:text-4xl font-bold mb-1">DEPENDÊNCIA</h2>
               <h2 className="text-[#c0964b] text-3xl md:text-4xl font-bold mb-2">EMOCIONAL</h2>
-              <p className="text-[#f4f0e1]/90 mb-6">gratuito</p>
             </div>
 
             <p className="text-[#f4f0e1]/80 mb-8 max-w-md mx-auto md:mx-0">

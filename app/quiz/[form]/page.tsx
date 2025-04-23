@@ -119,10 +119,9 @@ const questions = [
     }
 ]
 
-
 const mapTagSendFlow = {
     f: "oro-jun25frio",
-    o: "oro-jun25org",
+    org: "oro-jun25org",
     m: "oro-jun25morno",
     q: "oro-jun25quente",
 } as any;
@@ -171,8 +170,20 @@ export default function Quiz({ params }: { params: { form: string } }) {
           // Extrair os valores da string usando split
           const paramValue = _params.form as string;
           const parts = paramValue.split('-');
-          
-          if (parts.length >= 3) {
+
+          if (paramValue.indexOf('v1') != -1) {
+            const tipoValue = parts[2];
+            const versaoValue = parts[1];
+            const temperaturaValue = parts[parts.length - 1];
+            
+            console.log('Tipo:', tipoValue);
+            console.log('Versão:', versaoValue);
+            console.log('Temperatura:', temperaturaValue);
+            
+            setTipo(tipoValue);
+            setVersao(versaoValue);
+            setTemperatura(temperaturaValue);
+          } else if (paramValue.indexOf('v9') != -1) {
             const tipoValue = parts[0];
             const versaoValue = parts[1];
             const temperaturaValue = parts[2];

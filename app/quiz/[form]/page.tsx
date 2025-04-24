@@ -409,7 +409,7 @@ export default function Quiz({ params }: { params: { form: string } }) {
 
                         <p className="text-white text-base md:text-lg mb-5 md:mb-7 text-center" style={{ color: "#fff" }}>Para concluir sua inscrição, responda:</p>
 
-                        <div className="mb-4 md:mb-5">
+                        {/* <div className="mb-4 md:mb-5">
                         <div className="w-full h-1.5 bg-gray-700 rounded-full overflow-hidden">
                             <div
                             className="h-full bg-teal-600 transition-all duration-300 ease-in-out"
@@ -419,7 +419,7 @@ export default function Quiz({ params }: { params: { form: string } }) {
                             <p className="text-right text-xs md:text-sm text-gray-400 mt-1.5" style={{ color: "#fff" }}>
                                 {currentQuestion + 1} de {questions.length}
                             </p>
-                        </div>
+                        </div> */}
 
                         <div className="bg-zinc-900 rounded-lg p-4 md:p-7 mb-6 md:mb-8">
                             <h3 className="text-white text-base md:text-lg font-medium mb-4 md:mb-5 text-center" style={{ color: "#fff" }}>{currentQuestionData.question}</h3>

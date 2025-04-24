@@ -281,7 +281,7 @@ export default function HeroSection() {
             <div className="my-8">
               <p className="text-[#f4f0e1] text-xl mb-1">Faça seu diagnóstico de</p>
               <h2 className="text-[#c0964b] text-3xl md:text-4xl font-bold mb-1">DEPENDÊNCIA</h2>
-              <h2 className="text-[#c0964b] text-3xl md:text-4xl font-bold mb-2">EMOCIONAL</h2>
+              <h2 className="text-[#c0964b] text-3xl md:text-4xl font-bold mb-2">EMOCIONAL <span className="text-[#D3CAC0] text-2xl block md:inline">gratuito</span></h2>
             </div>
 
             <p className="text-[#f4f0e1]/80 mb-8 max-w-md mx-auto md:mx-0">

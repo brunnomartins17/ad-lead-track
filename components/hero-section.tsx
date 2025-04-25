@@ -212,6 +212,40 @@ export default function HeroSection() {
       setTimeout(() => {
         const redirectUrl = buildRedirectUrl();
         console.log('Redirecionando para:', redirectUrl);
+
+        const funnels = {
+          q: 'https://sf.aliancadivergente.com.br/sf/?sfunnel=48',
+          m: 'https://sf.aliancadivergente.com.br/sf/?sfunnel=39',
+          f: 'https://sf.aliancadivergente.com.br/sf/?sfunnel=31',
+        }
+        
+        // Adicionar parâmetros da URL atual
+        const currentUrl = new URL(window.location.href);
+        const currentParams = new URLSearchParams(currentUrl.search);
+        
+        // Construir URLs com parâmetros adicionais
+        Object.keys(funnels).forEach(key => {
+          const url = new URL(funnels[key as keyof typeof funnels]);
+          
+          // Adicionar todos os parâmetros da URL atual
+          currentParams.forEach((value, param) => {
+            url.searchParams.append(param, value);
+          });
+          
+          const fullPhone = whatsapp.replace(/\s+|-|\(|\)|\./g, "");
+          // Adicionar email, telefone e país
+          url.searchParams.append('email', email);
+          url.searchParams.append('phone', fullPhone);
+          url.searchParams.append('country', ddi.replace('+', ''));
+          
+          // Atualizar a URL no objeto funnels
+          funnels[key as keyof typeof funnels] = url.toString();
+        });
+
+        if (Object.keys(funnels).includes(temperatura || '')) {
+          window.location.href = funnels[temperatura as keyof typeof funnels];
+          return; // Interrompe a execução para evitar o redirecionamento padrão
+        }
         
         // Usar window.location.href para navegação completa
         if (typeof window !== 'undefined') {

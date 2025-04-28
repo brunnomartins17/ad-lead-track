@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import TagManager from "react-gtm-module";
 import useUserIP from "../hooks/useUserIP";
 
-const GTM_ID = "GTM-NC7GGZBX"; // Substitua pelo seu ID do GTM
+const GTM_ID = "GTM-KQWLTDD"; // Substitua pelo seu ID do GTM
 
 const GoogleTagManager = () => {
     const userIp = useUserIP(); // Captura o IP no carregamento

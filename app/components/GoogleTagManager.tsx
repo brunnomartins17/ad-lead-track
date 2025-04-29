@@ -9,8 +9,7 @@ const GoogleTagManager = () => {
     const userIp = useUserIP(); // Captura o IP no carregamento
     console.log('meu ip', userIp);
     useEffect(() => {
-        TagManager.initialize({ gtmId: 'GTM-NC7GGZBX' });
-        TagManager.initialize({ gtmId: 'GTM-KQWLTDD' });
+        TagManager.initialize({ gtmId: 'GTM-NC7GGZBX'});
     }, []);
 
     return null; // Esse componente não precisa renderizar nada

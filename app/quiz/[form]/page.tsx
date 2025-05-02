@@ -10,6 +10,7 @@ import { CustomRadio } from "@/app/components/custom-input"
 import SplashScreen from "@/app/components/SplashScreen"
 import { useParams, useSearchParams } from "next/navigation"
 import TagManager from "react-gtm-module";
+import { LogoResgate } from "@/app/components/LogoResgate"
 // Definição das perguntas e respostas com seus respectivos pesos
 const questions = [
     {
@@ -172,9 +173,9 @@ export default function Quiz({ params }: { params: { form: string } }) {
           const parts = paramValue.split('-');
 
           if (paramValue.indexOf('v1') != -1) {
-            const tipoValue = parts[2];
+            const tipoValue = parts[0];
             const versaoValue = parts[1];
-            const temperaturaValue = parts[parts.length - 1];
+            const temperaturaValue = parts[2];
             
             console.log('Tipo:', tipoValue);
             console.log('Versão:', versaoValue);
@@ -372,8 +373,116 @@ export default function Quiz({ params }: { params: { form: string } }) {
         return null;
     }
 
+    if (versao === 'v1') {
+        return (
+            <div>
+            <section className="relative flex items-center justify-center overflow-hidden  h-full font-['Epilogue',_sans-serif]">
+                {/* Background image with overlay */}
+                <div className="absolute inset-0 z-0 h-[890px]">
+                    <Image
+                        src="/images/Elton-Euller-O-Resgate-dos-Otimistas-V2-Obrigado-Desktop.webp"
+                        alt="Background"
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                </div>
+            
+                {/* Loading overlay */}
+                {isLoading && (
+                    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+                        <div className="text-center">
+                            <div className="w-16 h-16 border-4 border-t-teal-600 border-r-transparent border-b-teal-600 border-l-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                            <p className="text-white text-lg font-medium">Processando suas respostas...</p>
+                            <p className="text-gray-300 text-sm mt-2">Aguarde um momento, você será redirecionado em breve.</p>
+                        </div>
+                    </div>
+                )}
+                
+                {/* Background com overlay */}
+                <div className="container mx-auto relative h-full px-4">
+                    <div className="flex flex-col items-center justify-center text-center h-[890px]">
+                        <div className="w-full mx-auto">
+                            <div className="mb-3 md:mb-8 flex justify-center">
+                              <LogoResgate
+                                className="object-contain select-none pointer-events-none"
+                                width={window.innerWidth <= 768 ? 150 : 220}
+                                height={window.innerWidth <= 768 ? 60 : 100}
+                              />
+                            </div>
+
+                            <h1 className="text-xl  md:text-5xl font-bold text-[#F89500] -mb-1 md:mb-2 text-center">FALTA APENAS UM PASSO</h1>
+                            <h2 className="text-xl  md:text-5xl font-bold text-[#F89500] mb-4 md:mb-7 text-center">PARA GARANTIR SUA VAGA!</h2>
+
+                            <p className="text-white text-base md:text-lg mb-5 md:mb-7 text-center" style={{ color: "#fff" }}>Para concluir sua inscrição, responda:</p>
+
+                            <div className="rounded-lg p-4 md:p-7 mb-6 md:mb-8 border border-white max-w-xl mx-auto" style={{ backgroundColor: 'rgba(0, 0, 0, 0.79)' }}>
+                                <h3 className="text-white text-base md:text-lg font-medium mb-4 md:mb-5 text-left" style={{ color: "#fff" }}>{currentQuestionData.question}</h3>
+
+                                <CustomRadio options={currentQuestionData.options} value={selectedValue} onChange={handleAnswer} />
+
+                                <div className="grid grid-cols-2 gap-3 md:gap-2 mt-5 md:mt-7">
+                                    {currentQuestion > 0 && (
+                                        <Button
+                                            variant="outline"
+                                            onClick={handleBack}
+                                            className="bg-transparent border-gray-700 text-white hover:bg-gray-800 py-3 md:py-5 text-sm md:text-base"
+                                        >
+                                            VOLTAR
+                                        </Button>
+                                    )}
+                                    {currentQuestion === 0 && <div></div>}
+                                    <Button
+                                        onClick={handleNext}
+                                        disabled={!selectedValue}
+                                        className={`bg-[#F89500] hover:bg-[#e08600] text-white py-3 md:py-5 text-sm md:text-base ${currentQuestion === 0 ? 'col-span-2' : ''}`}
+                                    >
+                                        {isLastQuestion ? "ENVIAR" : "PRÓXIMA"}
+                                    </Button>
+                                </div>
+                            </div>
+
+                            <div className="mb-6 md:mb-8 text-center" style={{ color: "#fff" }}>
+                                <p className="text-white text-base md:text-xl mb-4 md:mb-5 max-w-xl mx-auto">
+                                    Após responder as questões, toque no botão abaixo 
+                                    para receber o link e materiais do evento:
+                                </p>
+
+                                <Button 
+                                    className="w-full py-4 md:py-6 text-sm md:text-base hover:opacity-90 transition-opacity duration-300 rounded-3xl max-w-sm"
+                                    onClick={() => window.location.href = `https://sendflow.pro/i/${mapTagSendFlow[temperatura || 'f']}`}
+                                    style={{ background: 'linear-gradient(96.48deg, #065100 -18.33%, #49E413 159.75%)' }}
+                                >
+                                    Clique aqui para entrar no Grupo no WhatsApp
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            {/* Rodapé com copyright */}
+            <footer className="w-full bg-black h-[150px] flex items-center justify-center">
+                <p className="text-gray-400 text-sm md:text-base text-center" style={{ color: "#fff" }}>© 2023. All rights reserved. Política de Privacidade.</p>
+            </footer>
+            </div>
+        )
+    }
+
     return (
-        <section className="relative flex items-center justify-center overflow-hidden bg-gradient-to-r from-[#000000] via-[#0a3a4a] to-[#000000] mb-[-50px] lg:mb-[-150px] h-full">
+        <section className="relative flex items-center justify-center overflow-hidden mb-[-50px] lg:mb-[-150px] h-full font-['Epilogue',_sans-serif]">
+            {/* Background image with overlay */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/images/Elton-Euller-O-Resgate-dos-Otimistas-V2-Obrigado-Desktop.webp"
+                    alt="Background"
+                    fill
+                    className="object-cover"
+                    priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#000000] via-[#0a3a4a] to-[#000000] opacity-90"></div>
+            </div>
+        
             {/* Loading overlay */}
             {isLoading && (
                 <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
@@ -390,18 +499,9 @@ export default function Quiz({ params }: { params: { form: string } }) {
                 <div className="flex flex-col items-center justify-center min-h-screen text-center py-8">
                     <div className="w-full max-w-xl mx-auto">
                         <div className="mb-6 md:mb-8 flex justify-center">
-                        <Image
-                            src="/images/logo-resgate-dos-otimistas.png"
-                            alt="Logotipo Resgate dos otimistas"
-                            width={320}
-                            height={196}
-                            priority
+                          <LogoResgate
                             className="object-contain select-none pointer-events-none"
-                            style={{
-                                maxWidth: "100%",
-                                height: "auto",
-                            }}
-                            />
+                          />
                         </div>
 
                         <h1 className="text-xl md:text-4xl font-bold text-custom-primary-gold mb-1 md:mb-2 text-center">FALTA APENAS UM PASSO</h1>
@@ -455,11 +555,12 @@ export default function Quiz({ params }: { params: { form: string } }) {
                             </p>
 
                             <Button 
-                                className="w-full py-4 md:py-6 text-base md:text-lg bg-green-600 hover:bg-green-700"
+                                className="w-full py-4 md:py-6 text-base md:text-lg hover:opacity-90 transition-opacity duration-300 rounded-[30%]"
                                 onClick={() => window.location.href = `https://sendflow.pro/i/${mapTagSendFlow[temperatura || 'f']}`}
+                                style={{ background: 'linear-gradient(96.48deg, #065100 -18.33%, #49E413 159.75%)' }}
                             >
                                 <Phone className="mr-2 h-4 w-4 md:h-5 md:w-5" /> 
-                                Entrar no Grupo no WhatsApp
+                                Clique aqui para entrar no Grupo no WhatsApp
                             </Button>
                         </div>
 

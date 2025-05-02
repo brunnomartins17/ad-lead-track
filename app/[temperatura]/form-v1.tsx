@@ -254,9 +254,11 @@ export default function Form() {
           funnels[key as keyof typeof funnels] = url.toString();
         });
 
-        if (Object.keys(funnels).includes(temperatura || '')) {
-          window.location.href = funnels[temperatura as keyof typeof funnels];
-          return; // Interrompe a execução para evitar o redirecionamento padrão
+        if (versao === 'v9') {
+          if (Object.keys(funnels).includes(temperatura || '')) {
+            window.location.href = funnels[temperatura as keyof typeof funnels];
+            return; // Interrompe a execução para evitar o redirecionamento padrão
+          }
         }
         
         // Usar window.location.href para navegação completa

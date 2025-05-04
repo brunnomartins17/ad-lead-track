@@ -69,7 +69,7 @@ const questions = [
         question: "Qual das opções representa a sua renda mensal hoje?",
         options: [
             { value: "ate1000", label: "Até R$ 1.000,00", weight: 15.4 },
-            { value: "1001a2500", label: "De R$ 1.001,00 a R$ 2.500,00", weight: 18.2 },
+            { value: "1101a2500", label: "De R$ 1.101,00 a R$ 2.500,00", weight: 18.2 },
             { value: "2501a4000", label: "De R$ 2.501,00 a R$ 4.000,00", weight: 26.5 },
             { value: "4001a10000", label: "De R$ 4.001,00 a R$ 10.000,00", weight: 36.5 },
             { value: "acima10000", label: "Acima de R$ 10.000,00", weight: 51.5 },
@@ -272,7 +272,13 @@ export default function Quiz({ params }: { params: { form: string } }) {
                 ...gtmData,
                 detailedAnswers: detailedAnswers,
                 domain: domain,
-                launch: launch
+                launch: launch,
+                utm_source: searchParams.get('utm_source') || '',
+                utm_medium: searchParams.get('utm_medium') || '',
+                utm_campaign: searchParams.get('utm_campaign') || '',
+                utm_content: searchParams.get('utm_content') || '',
+                utm_term: searchParams.get('utm_term') || '',
+                path: window.location.pathname,
             }
 
             // Still send to GTM as before

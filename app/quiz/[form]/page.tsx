@@ -479,13 +479,6 @@ export default function Quiz({ params }: { params: { form: string } }) {
         <section className="relative flex items-center justify-center overflow-hidden mb-[-50px] lg:mb-[-150px] h-full font-['Epilogue',_sans-serif]">
             {/* Background image with overlay */}
             <div className="absolute inset-0 z-0">
-                <Image
-                    src="/images/Elton-Euller-O-Resgate-dos-Otimistas-V2-Obrigado-Desktop.webp"
-                    alt="Background"
-                    fill
-                    className="object-cover"
-                    priority
-                />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#000000] via-[#0a3a4a] to-[#000000] opacity-90"></div>
             </div>
         
@@ -505,9 +498,17 @@ export default function Quiz({ params }: { params: { form: string } }) {
                 <div className="flex flex-col items-center justify-center min-h-screen text-center py-8">
                     <div className="w-full max-w-xl mx-auto">
                         <div className="mb-6 md:mb-8 flex justify-center">
-                          <LogoResgate
+                        <Image
+                            src="/images/logo-resgate-dos-otimistas.png"
+                            alt="Logotipo Resgate dos otimistas"
+                            width={320}
+                            height={196}
+                            priority
                             className="object-contain select-none pointer-events-none"
-                          />
+                            style={{
+                                maxWidth: "100%",
+                                height: "auto",
+                            }} />
                         </div>
 
                         <h1 className="text-xl md:text-4xl font-bold text-custom-primary-gold mb-1 md:mb-2 text-center">FALTA APENAS UM PASSO</h1>
@@ -561,7 +562,7 @@ export default function Quiz({ params }: { params: { form: string } }) {
                             </p>
 
                             <Button 
-                                className="w-full py-4 md:py-6 text-base md:text-lg hover:opacity-90 transition-opacity duration-300 rounded-[30%]"
+                                className="w-full py-4 md:py-6 text-base md:text-lg hover:opacity-90 transition-opacity duration-300 rounded-3xl"
                                 onClick={() => window.location.href = `https://sendflow.pro/i/${mapTagSendFlow[temperatura || 'f']}`}
                                 style={{ background: 'linear-gradient(96.48deg, #065100 -18.33%, #49E413 159.75%)' }}
                             >
